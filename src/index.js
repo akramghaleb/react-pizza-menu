@@ -68,7 +68,6 @@ function Header() {
 function Menu() {
   const pizzas = pizzaData;
 
-
   return (
     <div className='menu'>
       <h2>Our Menu</h2>
@@ -85,15 +84,15 @@ function Menu() {
   )
 }
 
-function Pizza(props) {
+function Pizza({ pizzaObj }) {
 
-  if (props.pizzaObj.soldOut) {
+  if (pizzaObj.soldOut) {
     return (
       <li className='pizza sold-out'>
-        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+        <img src={pizzaObj.photoName} alt={pizzaObj.name} />
         <div>
-          <h3>{props.pizzaObj.name}</h3>
-          <p>{props.pizzaObj.ingredients}</p>
+          <h3>{pizzaObj.name}</h3>
+          <p>{pizzaObj.ingredients}</p>
           <span>Sold Out</span>
         </div>
       </li>
@@ -102,11 +101,11 @@ function Pizza(props) {
 
   return (
     <li className='pizza'>
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price + 3}$</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price + 3}$</span>
       </div>
     </li>
   )
@@ -125,7 +124,7 @@ function Footer() {
   // }
   return (
     <footer className='footer'>
-      {isOpen ? <Order closeHour={closeHour} />
+      {isOpen ? <Order openHour={openHour} closeHour={closeHour} />
         :
         (<p>We're happy to welcome you between {openHour}:00 and{closeHour}:00 </p>)
       }
@@ -134,11 +133,11 @@ function Footer() {
   //return React.createElement("footer", null, new Date().toLocaleDateString()}."We're currently open!");
 }
 
-function Order(props) {
+function Order({ openHour, closeHour }) {
   return (
     <div className='order'>
       <p>
-        We're open until {props.closeHour}:00. Come visit us or order online.
+        We're open from {openHour} to {closeHour}:00. Come visit us or order online.
       </p>
       <button className='btn'>Order</button>
     </div>
